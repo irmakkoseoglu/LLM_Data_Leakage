@@ -1,0 +1,21 @@
+filename,pipeline_id,has_leakage,leakage_type,notes
+asingh_conversion-rate-prediction.py,asingh_conversion-rate-prediction,True,overlap,KFold(shuffle=True) on user-session rows — same user appears across train and test folds
+bpatel_tabular-benchmark.py,bpatel_tabular-benchmark,True,overlap,"np.vstack([X_train, X_test]) adds test samples directly to training set"
+churn_model_comparison.py,nb_4827,True,multi-test,Two models (LogisticRegression and DecisionTreeClassifier) both evaluated on same X_test; best model selected based on test accuracy with no independent holdout
+credit_feature_selection.py,nb_3341,True,multi-test,Four feature subsets each evaluated on same X_test via roc_auc_score; best feature set selected based on test performance with no independent holdout
+heart_knn_tuning.py,nb_9163,True,multi-test,KNN evaluated on X_test for each k from 1 to 20; k hyperparameter selected based on test F1 score with no independent holdout
+nb_1215904.py,nb_1215904,True,multi-test,X_test evaluated with first model using model.evaluate
+nb_282393.py,nb_282393,True,preprocessing,train_X and test_X concatenated into full_data before StandardScaler fit_transform applied column by column; test data statistics influence scaling parameters before train and test are separated again
+nb_290532.py,nb_290532,True,temporal,"next_value = value.shift(-1) and next_2_value = value.shift(-2) (lines 11-12) pull readings 1 and 2 steps into the future and are kept directly as features, despite the split itself being correctly chronological (shuffle=False, line 18)"
+nb_292583.py,nb_292583,True,preprocessing,"MinMaxScaler.fit_transform(data[numerical]) at line 126 is fit on the full dataset, and pd.get_dummies(features_raw) at line 151 is applied to the full dataset — both occur before train_test_split (line 176), so test distribution leaks into scaling parameters and encoding columns"
+nb_309926.py,nb_309926,True,temporal,"rolling(window=7, center=True) (lines 12-13) computes rolling_avg/rolling_std using a centered window that includes future readings within each window, despite the split itself being correctly chronological (shuffle=False, line 19)"
+nb_469191.py,nb_469191,True,temporal,"train_test_split(..., stratify=y) (lines 41-43) forces a shuffled split to balance the rare defect class across train/test on chronologically sorted batch data (sorted line 18) — class-balance stratification overrides time order, letting future batches into training"
+nb_535798.py,nb_535798,False,none,"GridSearchCV restricted to X_train only, independent test set used once at the end"
+nb_583353.py,nb_583353,False,none,"SMOTE applied only to training set after the split, test set untouched"
+nb_691551.py,nb_691551,False,none,"GridSearchCV restricted to trainval portion with TimeSeriesSplit, independent final test holdout"
+nb_840896.py,nb_840896,True,temporal,next_temp_anomaly = temp_anomaly_index.shift(-3) (line 44) pulls the reading from 3 steps in the future and is kept directly in feature_cols (line 56); on top of that train_test_split (line 64) uses default shuffle=True on already-sorted data — both the engineered feature and the split ignore time order
+nb_930284.py,nb_930284,True,overlap,sample(replace=True) bootstraps full data — duplicate test rows copied into training
+nb_995729.py,nb_995729,False,none,Outlier clipping threshold computed from training distribution only
+shahules_tackling-class-imbalance.py,shahules_tackling-class-imbalance,True,preprocessing,RandomUnderSampler applied to full X before train_test_split inside logistic()
+test2.py,test2,True,preprocessing,Fare fillna uses np.mean(df['Fare']) where df contains full dataset including test rows — imputation value derived from test data
+titanic0.py,titanic0,True,overlap,Train and test concatenated into combined data before all preprocessing
