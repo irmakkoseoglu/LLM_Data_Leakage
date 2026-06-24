@@ -65,7 +65,6 @@ LLM_Data_Leakage/
 │   ├── gpt4o_fewshot_details.csv
 │   └── gpt4o_cot_details.csv
 │
-├── paper/                    # Paper draft and result tables
 │
 ├── detect_leakage_gpt4o_dev.py   # Shot optimization on development set
 └── detect_leakage_gpt4o_test.py  # Final evaluation on test set
@@ -87,9 +86,9 @@ The dataset consists of **96 unique Python ML pipelines** spanning five categori
 
 **Sources:**
 - **Real-world (39):** Sourced from Yang et al.'s benchmark (Kaggle and GitHub notebooks)
-- **Synthetic (57):** Generated using Claude Sonnet to ensure balanced type coverage, particularly for temporal leakage which is absent in existing benchmarks. Each synthetic pipeline was manually reviewed for accuracy.
+- **Collected (57):** Other pipelines are collected in order to create a balanced dataset.
 
-> ⚠️ Pipeline `.py` files are not tracked in this repository due to licensing restrictions. Ground truth annotations are fully available in `annotations/`.
+> ⚠️ Pipeline `.py` files are not tracked in this repository due to licensing restrictions.
 
 ---
 
