@@ -150,21 +150,6 @@ Results are saved to `experiments/` with per-file predictions and per-type break
 
 3. AlOmar, E. A., DeMario, C., Shagawat, R., & Kreiser, B. (2025). *LeakageDetector: An open source data leakage analysis tool in machine learning pipelines.* arXiv:2503.14723.
 
----
-
-## Citation
-
-If you use this dataset or code in your research, please cite:
-
-```bibtex
-@article{koseoglu2025llm,
-  title     = {LLM-Based Detection of Data Leakage in Machine Learning Pipelines: 
-               A Comparative Study of Prompting Strategies},
-  author    = {Koseoglu, Irmak},
-  year      = {2025},
-  note      = {Manuscript in preparation}
-}
-```
 
 ---
 
